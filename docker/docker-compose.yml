@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./postgres
+    container_name: postgres_db
+#    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: example_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    command: >
+      postgres -c shared_preload_libraries=pg_cron
+               -c cron.database_name=example_db
+
+volumes:
+  pgdata:
