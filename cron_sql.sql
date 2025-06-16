@@ -17,35 +17,6 @@ CREATE TABLE users_audit (
     new_value TEXT
 );
 
-
---CREATE OR REPLACE FUNCTION log_user_changes()
---RETURNS TRIGGER AS $$
---BEGIN
---    IF NEW.name IS DISTINCT FROM OLD.name THEN
---        INSERT INTO users_audit (user_id, changed_by, field_changed, old_value, new_value)
---        VALUES (OLD.id, current_user, 'name', OLD.name, NEW.name);
---    END IF;
---
---    IF NEW.email IS DISTINCT FROM OLD.email THEN
---        INSERT INTO users_audit (user_id, changed_by, field_changed, old_value, new_value)
---        VALUES (OLD.id, current_user, 'email', OLD.email, NEW.email);
---    END IF;
---
---    IF NEW.role IS DISTINCT FROM OLD.role THEN
---        INSERT INTO users_audit (user_id, changed_by, field_changed, old_value, new_value)
---        VALUES (OLD.id, current_user, 'role', OLD.role, NEW.role);
---    END IF;
---
---    RETURN NEW;
---END;
---$$ LANGUAGE plpgsql;
-
-
---CREATE OR REPLACE TRIGGER trg_user_update_audit
---AFTER UPDATE ON users
---FOR EACH ROW
---EXECUTE FUNCTION log_user_changes();
-
 CREATE OR REPLACE FUNCTION log_user_changes()
 RETURNS trigger
 AS 'log_user_changes_c', 'log_user_changes_c'

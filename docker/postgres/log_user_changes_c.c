@@ -26,7 +26,6 @@ log_change_if_needed(HeapTuple oldtup, HeapTuple newtup, TupleDesc tupdesc,
     if (isnull_old || isnull_new)
         return;
 
-    // Convert text Datum to C-string
     char *old_str = TextDatumGetCString(old_val);
     char *new_str = TextDatumGetCString(new_val);
 
